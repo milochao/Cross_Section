@@ -322,7 +322,88 @@ p.is-on{}
 #surface[data-state="open"] #cam{--cam:translate(-693.5px,25.7px) scale(2.9)}
 #surface[data-state="singles"] #cam{--cam:translate(0.0px,0.0px) scale(1.0)}
 #surface[data-state="whole-outer"] #cam{--cam:translate(0.0px,0.0px) scale(1.0)}
-#surface[data-state="door"] #cam{--cam:translate(-693.5px,25.7px) scale(2.9)}</style>
+#surface[data-state="door"] #cam{--cam:translate(-693.5px,25.7px) scale(2.9)}
+/* ============================================================
+   CANON LAYER — paste immediately before the closing style tag
+   PALETTE: PAM near-black #1A1A1A + PAM green #55BA5A.
+   One knob. If the essay's --green (#3DAE49) is the intended
+   web green, change --cn-accent on the next line and nothing else.
+   Uses only tokens already declared in :root. Adds none.
+   ============================================================ */
+
+/* ---- the marker: apparatus, not prose ---- */
+:root{ --cn-accent:#55BA5A; }
+
+.cn-mark{
+  all:unset; display:flex; width:100%; box-sizing:border-box;
+  align-items:baseline; gap:12px; cursor:pointer;
+  font-family:var(--sans); font-size:12.5px; font-weight:600;
+  letter-spacing:.03em; color:var(--cn-accent);
+  border-top:1px solid var(--faint); border-bottom:1px solid var(--faint);
+  padding:9px 2px; margin:1.6em 0 1.9em;
+  transition:border-color .2s var(--ease), color .2s var(--ease);
+}
+.cn-mark:hover,.cn-mark:focus-visible{ border-color:var(--cn-accent); }
+.cn-mark .cn-caret{ flex:none; transition:transform .3s var(--ease); }
+.cn-mark[aria-expanded="true"] .cn-caret{ transform:rotate(90deg); }
+.cn-mark .cn-claim{ flex:1 1 auto; }
+.cn-mark .cn-who{
+  flex:none; color:var(--light); font-weight:600;
+  font-size:11px; letter-spacing:.11em; text-transform:uppercase;
+}
+
+/* ---- the panel: grid-rows trick, auto height, no JS measuring ---- */
+.cn-wrap{ display:grid; grid-template-rows:0fr;
+  transition:grid-template-rows .38s var(--ease); }
+.cn-wrap.is-open{ grid-template-rows:1fr; }
+.cn-inner{ overflow:hidden; }
+.cn-card{
+  background:var(--wash); border:1px solid var(--faint);
+  border-left:3px solid var(--cn-accent);
+  padding:22px clamp(16px,3vw,26px) 20px; margin:0 0 2.2em;
+}
+.cn-kind{
+  font-family:var(--sans); font-size:10.5px; font-weight:700;
+  letter-spacing:.15em; text-transform:uppercase; color:var(--cn-accent);
+  margin-bottom:10px;
+}
+.cn-src{ font-family:var(--serif); font-size:15.5px; color:var(--ink);
+  line-height:1.4; margin-bottom:13px; }
+.cn-src em{ font-style:italic; color:var(--mid); }
+.cn-src b{ font-weight:600; }
+.cn-body{ font-family:var(--serif); font-size:16.5px; line-height:1.62;
+  color:var(--ink); }
+.cn-body + .cn-body{ margin-top:.85em; }
+.cn-cite{ font-family:var(--sans); font-size:11px; font-weight:600;
+  letter-spacing:.08em; color:var(--light); margin-top:14px; }
+.cn-fig{ margin:16px 0 4px; }
+.cn-fig svg{ display:block; width:100%; height:auto; }
+
+/* ---- figure type, sized in CSS so it can be bumped on small screens ---- */
+.tf-title{ font-family:var(--sans); font-size:30px; font-weight:800;
+  letter-spacing:.05em; }
+.tf-sub{ font-family:var(--serif); font-size:15px; font-style:italic; }
+.tf-note{ font-family:var(--serif); font-size:14px; }
+.tf-seam{ font-family:var(--sans); font-size:13px; font-weight:600;
+  letter-spacing:.14em; }
+.tf-cap{ font-family:var(--serif); font-size:15px; }
+
+@media (max-width:900px){
+  .cn-mark{ font-size:13px; align-items:flex-start; flex-wrap:wrap; }
+  .cn-mark .cn-who{ width:100%; padding-left:22px; margin-top:4px; }
+  .cn-body{ font-size:16px; }
+  .tf-title{ font-size:52px; }
+  .tf-sub{ font-size:26px; }
+  .tf-note{ font-size:25px; }
+  .tf-seam{ font-size:19px; }
+  .tf-cap{ font-size:26px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .cn-wrap,.cn-mark .cn-caret{ transition:none; }
+}
+
+</style>
 </head>
 <body>
 
@@ -360,6 +441,7 @@ p.is-on{}
 <blockquote class="pull">&quot;Time and again folks go, I don&#x27;t understand it. Why do you have nothing that tells this story other than what you just verbally said? This is like mecca.&quot;</blockquote>
 <p class="attrib"><img class="face" src="Pat_Burt.png" alt="Pat Burt" loading="lazy" width="128" height="128"><span>Pat Burt</span></p>
 <p>That question, asked by strangers standing on a sidewalk, is the case for the museum in one line. A town this known, with a history this deep, and no place that keeps the story whole.</p>
+<button class="cn-mark" data-cn="sidewalk" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">A 1971 argument for going out to the people who never come in</span><span class="cn-who">Cameron</span></button><div class="cn-wrap" id="cn-sidewalk"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; article, 1971</div><div class="cn-src"><b>Duncan Cameron</b>, <em>The Museum, a Temple or the Forum</em></div><div class="cn-body">Duncan Cameron ran the Brooklyn Museum, and in 1971 he argued that museums watch the wrong audience. They count how often their current visitors come back, and pay no attention to the people who will never walk in at all. More than half the potential audience, he wrote, will not come to the museum or to anything like it, so the institution has to go out and find them. Burt is standing with that audience, on the corner.</div><div class="cn-cite">Duncan Cameron, &ldquo;The Museum, a Temple or the Forum,&rdquo; <em>Curator</em> XIV/1 (1971), pp. 22&ndash;23</div></div></div></div>
 <p>The fame is not in dispute. Gennady Sheyner has covered the city for the Palo Alto Weekly since 2008 and lives in San Francisco, which gives him the view from outside the town limits:</p>
 <blockquote class="pull">&quot;When I think of Palo Alto, I think it was kind of a cultural force. I was at my favorite bookstore the other day, Green Apple in San Francisco, and you go to their staff hall of fame pick, and Malcolm Harris, <em>Palo Alto</em>, is at the top shelf. I&#x27;m like, man, Mountain View can&#x27;t do that. Menlo Park can&#x27;t do that. Palo Alto is like a brand. People know it. It&#x27;s loaded in ways good and bad, but it&#x27;s not obscure. Radiohead has a song called Palo Alto. They don&#x27;t have a song called Sunnyvale.&quot;</blockquote>
 <p class="attrib"><img class="face" src="Gennady.png" alt="Gennady Sheyner" loading="lazy" width="128" height="128"><span>Gennady Sheyner</span></p>
@@ -406,6 +488,7 @@ p.is-on{}
 <p><strong>The open door.</strong> The museum belongs to whoever gets invited in, and the invitation is the work. Newcomers, visitors, and the large majority of people who do not walk around already caring about local history.</p>
 <p><strong>The sidewalk.</strong> The museum&#x27;s territory runs past its own walls, out to the unmarked corners where the story actually happened.</p>
 <p>None of these is wrong. The instinct in a room like this is to treat five answers as a problem to be resolved down to one, and that instinct should be resisted.</p>
+<button class="cn-mark" data-cn="five" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">Three people who never read each other object here</span><span class="cn-who">Cameron &middot; Serrell &middot; Rumelt</span></button><div class="cn-wrap" id="cn-five"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; three sources</div><div class="cn-src"><b>Duncan Cameron</b> 1971 &middot; <b>Beverly Serrell</b> 1996 &middot; <b>Richard Rumelt</b> 2011</div><div class="cn-body">Cameron quotes a museum describing itself as an art museum, a science museum, a historical museum, an arts council and an activity center, and files that under identity crisis rather than range. Serrell&#x27;s rule for planning an exhibition is one big idea, written down, and not four, because an idea nobody wrote down turns into as many ideas as there are people on the team. Rumelt lists trying to satisfy every demand at once as a mark of bad strategy. None of the three read the others. All three would read five answers as a symptom.</div><div class="cn-body">Section 9 answers them. It is worth knowing that the answer is coming.</div><div class="cn-cite">Cameron, <em>Curator</em> XIV/1 (1971), pp. 11&ndash;13 &middot; Beverly Serrell, <em>Exhibit Labels: An Interpretive Approach</em> (AltaMira, 1996), pp. 1 and 7 &middot; Richard Rumelt, <em>Good Strategy Bad Strategy</em> (Crown Business, 2011), ch. 3</div></div></div></div>
 <p data-state="read-five">Look at a cut trunk and you see the whole history at once, and you also see that different people looking at the same cut surface will point at different things and all of them will be pointing at something real. One person counts the rings and tells you the age. One reads the wide bands and tells you which years had rain. One finds the scar where a fire came through in a decade nobody alive remembers. One points at the dark core in the middle, which is dead wood that stopped carrying water long ago and holds the tree up. One points at the thin pale layer just under the bark, which is the only living part and the only place next year gets made.</p>
 <p data-state="read-all">They are all correct. None of them is describing a different tree.</p>
 <p data-state="read-all">That decides the writing ahead, and it decides it in a way that is more freeing than it first sounds. The museum does not have to referee among these five, because they are not competing claims on the same territory. It has to be all of them. What it cannot do is let its language imply that any one of them is the point. The moment the copy privileges the archive, or the families, or the builders, or the open door, or the sidewalk, four other groups of true believers hear that their museum went missing.</p>
@@ -432,6 +515,7 @@ p.is-on{}
 <p>No grieving family, no Stanford. No Stanford, no college town. No college town, no museum.</p>
 <p>Staiger also states a fact about ownership that the copy can use rather than avoid. &quot;The archives are part of the city. They&#x27;re owned by the city. They&#x27;re not owned by the museum.&quot; The city owns the Guy C. Miller Archives and hires two part-time contractors, Staiger and Darla Secor, to manage them and serve as city historians. When the museum opens, the archives will occupy a dedicated room in the Roth Building, which the city also owns; the museum is the tenant on a forty-year lease and stewards the building without operating the archives inside it. The museum and the city are built into each other, and the town&#x27;s record stays public property.</p>
 <p>What the record people are protecting against is an institution that spends its budget on the visit and lets the holding thin out.</p>
+<button class="cn-mark" data-cn="janes1" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">Whether a museum has to have a collection at all</span><span class="cn-who">Janes</span></button><div class="cn-wrap" id="cn-janes1"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; chapter, 2018</div><div class="cn-src"><b>Robert R. Janes</b>, &ldquo;Rethinking Museum Collections in a Troubled World&rdquo;</div><div class="cn-body">Robert Janes ran a museum for years and came out arguing that the permanent collection is not the given everyone treats it as. He calls it a supposition, and says that insisting on it can hold an institution back from what it could otherwise be. Palo Alto has an unusual answer available. The city owns the archives and pays the historians. The museum holds the room and not the holding. That is close to the arrangement Janes says most museums cannot get to.</div><div class="cn-cite">Robert R. Janes, &ldquo;Rethinking Museum Collections in a Troubled World,&rdquo; ch. 7 of an edited Routledge volume (2018), pp. 88&ndash;89 and 91</div></div></div></div>
 <h3 class="sec">4.2 The album</h3>
 <p class="group">Gloria Hom. Bill Reller. Robert Villarreal.</p>
 <p data-state="read-album">Three people who were here, or whose families were here, hold the museum as something closer to a family album than a repository. The distinction is not small. A record serves the future and belongs to nobody in particular. An album belongs to somebody, and the people in it expect to find themselves.</p>
@@ -445,6 +529,7 @@ p.is-on{}
 <p class="attrib"><img class="face" src="Robert_Villarreal.png" alt="Robert Villarreal" loading="lazy" width="128" height="128"><span>Robert Villarreal</span></p>
 <p>That is the one voice treating the wait as a gift rather than a debt, and section 9 comes back to it.</p>
 <p>His differentiator is the fun factor. Car shows, dog shows, movies, music. He notes that none of the competing institutions nearby has anything like it, and he is right that none of them do.</p>
+<button class="cn-mark" data-cn="pine" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">The car shows have a framework behind them</span><span class="cn-who">Pine and Gilmore</span></button><div class="cn-wrap" id="cn-pine"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; book, 1999</div><div class="cn-src"><b>B. Joseph Pine II</b> and <b>James H. Gilmore</b>, <em>The Experience Economy</em></div><div class="cn-body">Pine and Gilmore sort experiences by two questions. How active is the person, and are they absorbed or surrounded. That produces four kinds, which they name entertainment, education, escape and the esthetic. Museums default to the last one, where the visitor mostly looks. Their argument is that the strongest experiences reach into all four. On that reading the fun factor is not a departure from museum work. It is the part most museums leave out.</div><div class="cn-cite">B. Joseph Pine II and James H. Gilmore, <em>The Experience Economy</em> (Harvard Business Review Press, updated edition 2011; first published 1999), ch. 2</div></div></div></div>
 <p>What the album people are guarding against is a beautiful building that belongs to nobody in particular.</p>
 <h3 class="sec">4.3 The toolbox</h3>
 <p class="group">Marguerite Gong Hancock. Sina Farzaneh. Nelson Ng. Bruce Gee.</p>
@@ -455,6 +540,7 @@ p.is-on{}
 <p class="attrib"><img class="face" src="Sina-Farzaneh.png" alt="Sina Farzaneh" loading="lazy" width="128" height="128"><span>Sina Farzaneh</span></p>
 <p>The machines already have a museum twelve minutes down the road. The ingredients do not. He also offers the line that could hang over the door, and it arrived in conversation fully formed: just as TED is ideas worth spreading, this is ideas worth building.</p>
 <p>Nelson Ng, the board chair, wants the institution itself to be alive rather than archival. &quot;I would rather have us be a living organization, a living museum.&quot; He proposes letting residents pitch exhibit ideas to a panel, startup style, with the community voting on what gets built. He also wants an exhibit that lets a visitor walk through a past decade inside a life different from their own.</p>
+<button class="cn-mark" data-cn="simon" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">What Nelson&#x27;s proposal is called, and how it usually fails</span><span class="cn-who">Simon &middot; Lynch</span></button><div class="cn-wrap" id="cn-simon"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; two books</div><div class="cn-src"><b>Nina Simon</b>, <em>The Participatory Museum</em> &middot; <b>Bernadette Lynch</b>, <em>Whose Cake Is It Anyway?</em></div><div class="cn-body">Nina Simon would call this contributory or collaborative, depending on who sets the terms, and would ask what the museum plans to do with what people send in. A contribution nobody uses costs more trust than it earns. Bernadette Lynch studied twelve museums and galleries in the UK running exactly this kind of program and found the same failure in most of them. The institution keeps control, rewards the least difficult proposals, and leaves people asking rather than deciding.</div><div class="cn-body">Her second finding matters more for a museum still writing its budget. Participation paid for out of project grants rather than core budget stays at the edge permanently. The funding shape decides the outcome before the program starts.</div><div class="cn-cite">Nina Simon, <em>The Participatory Museum</em> (Museum 2.0, 2010), pp. 184&ndash;185 &middot; Bernadette Lynch, <em>Whose Cake Is It Anyway?</em> (Paul Hamlyn Foundation, 2011), pp. 6, 11, 16</div></div></div></div>
 <p>Bruce Gee, who would tell you himself that museums are not his natural habitat, became a donor anyway. He wants the museum itself to be the innovation. Run so inventively that other towns copy it, the way this town&#x27;s companies get copied, and become &quot;a model for other communities and other museums.&quot; That is not a programming note. It is a claim that the institution should be held to the standard of the place it sits in.</p>
 <p>He also locates the town&#x27;s real subject one level up from its products. Not innovation, which he says sounds too sciency, but the culture around it: &quot;what it means to start up... not just what they did, but how they did it, and what they were thinking.&quot; What was in the recipe, rather than what came out of the oven.</p>
 <p>And he supplies the rule that governs the gathering question in section 5.3:</p>
@@ -468,6 +554,7 @@ p.is-on{}
 <p>Fogarty puts it in five words. It is about who gets invited in. She is careful about who she means, and it is not the people who already care. She means the newcomers and the visitors and the residents who have never once thought about local history. She also wants the museum to widen who counts as history in the first place, putting ordinary people into the record alongside the famous ones. Her example is Juana Briones, and what she wants a visitor to leave asking is how a woman came to own property in this region and do everything else she did.</p>
 <p>She has a local model for the whole idea. Gamble Gardens is a property left to the city, now a nonprofit some decades old, which she describes as having moved from older women tending flower beds to drawing in schoolchildren and people who have never planted anything. That is the open door with a working example attached, two miles away, run by people this board could call.</p>
 <p>Liz Austerman turns the ambition into work, which is what a trained museum professional does to a board conversation. &quot;When we just say we&#x27;re for everybody, that gets hard.&quot; She names the decision hiding inside the sentiment, starting with how much of the opening calendar belongs to families. And she brings a standard she developed over four hundred family interviews at a previous institution: <strong>considered.</strong> Can a visitor feel that the institution thought about them in advance. She means it down to the coffee.</p>
+<button class="cn-mark" data-cn="falk" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">Two answers to Austerman&#x27;s question, and they contradict</span><span class="cn-who">Falk &middot; Serrell</span></button><div class="cn-wrap" id="cn-falk"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; a disagreement</div><div class="cn-src"><b>John H. Falk</b> &middot; <b>Beverly Serrell</b></div><div class="cn-body">John Falk sorts visitors into five motivations and argues that demographics predict almost nothing about what a person does inside a museum, while motivation predicts a great deal. Beverly Serrell used to believe in visitor types and stopped, after enough tracking and timing convinced her that nearly everyone behaves the same way. Short on time, not an expert, sampling rather than reading. Falk says design for the mix. Serrell says design for one audience and stop assuming you can tell them apart.</div><div class="cn-body">Neither can be run here yet. Both need visitor data and the museum has none.</div><div class="cn-cite">John H. Falk, &ldquo;Understanding Museum Visitors&rsquo; Motivations and Learning,&rdquo; p. 117 &middot; Serrell, <em>Exhibit Labels</em> (1996), pp. 40&ndash;41 and p. 63 n.4</div></div></div></div>
 <p>Nadia Naik holds the emotional version. She loves the picture of a third place &quot;where you can go and feel known,&quot; and says in the next breath that being that for all people is hard. She also observes that history lands best when people stumble into it during ordinary life rather than when they set out to learn something, which is an argument for the museum leaking out of the building and into the town&#x27;s routines.</p>
 <p>Holman gives the formulation that reconciles the ambition with the honesty, from my notes: &quot;Not everybody, because that is not realistic. But anybody who wants to learn and experience should be able to take part.&quot; Not everybody, but anybody.</p>
 <p>What the open door people are guarding against is a museum for the people who were always going to show up.</p>
@@ -476,6 +563,7 @@ p.is-on{}
 <p data-state="read-sidewalk">The last part is the one that does not fit inside the building, and it belongs to three people who spend more of their attention on the town than on the institution.</p>
 <p>Burt wants the exhibit to escape onto the streets where the delegations already stand asking why nothing is marked. He is not proposing a signage program as a nice addition. He is describing the location of the story, which is distributed across corners and garages and storefronts that thousands of people walk past every week without knowing what happened there.</p>
 <p>He also coins a phrase in the middle of the conversation. <strong>Future history.</strong> What is being born here right now is the exhibit of thirty years from now, and somebody should be collecting it while it is happening rather than reconstructing it later.</p>
+<button class="cn-mark" data-cn="janes2" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">Why future history usually stays a phrase</span><span class="cn-who">Janes</span></button><div class="cn-wrap" id="cn-janes2"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; chapter, 2018</div><div class="cn-src"><b>Robert R. Janes</b>, &ldquo;Rethinking Museum Collections in a Troubled World&rdquo;</div><div class="cn-body">Janes names the obstacle. Museums are too slow and too expensive in their own procedures to collect the material culture of a society while it is still happening, which is why most collections do not reflect the society they claim to represent. Collecting the present is not a decision anyone makes once. It is a staffing line and a written policy, in place before the material is gone.</div><div class="cn-cite">Robert R. Janes, &ldquo;Rethinking Museum Collections in a Troubled World,&rdquo; ch. 7 of an edited Routledge volume (2018), p. 90</div></div></div></div>
 <p>Tom DuBois asks how far out the territory runs, and he defines the difference in miles traveled rather than in mission language, from my notes: &quot;Are we a small city museum like the Los Altos History Museum, or are we trying to tell a broader regional story? What kind of draw are we going to be? The Palo Alto story can be amazing, but we have to decide how ambitious we want to be.&quot;</p>
 <p>The room has not decided that, and it is one of the open choices in section 7.</p>
 <p>And Gennady walks around the outside and reports what the town sees, which is a read the museum could not have generated internally. His observation is that the Roth Building mattered to this town on its own, before the museum&#x27;s case for it was finished. People fought for that building because it was that building. The community decided years ago that the site was precious, independently of what would eventually go inside it.</p>
@@ -492,6 +580,7 @@ p.is-on{}
 <blockquote class="pull">&quot;I need $100,000 sponsorship for the eugenics exhibit. Tell me, who&#x27;s going to line up to do that? ... I&#x27;m not saying you shouldn&#x27;t do this thing, but you have to just sort of say the viability of the museum really depends on that.&quot;</blockquote>
 <p class="attrib"><img class="face" src="Bruce_Gee.png" alt="Bruce Gee" loading="lazy" width="128" height="128"><span>Bruce Gee</span></p>
 <p>That is not an argument against telling the hard chapters. It is an argument that telling them is a funded activity or it is not an activity.</p>
+<button class="cn-mark" data-cn="raicovich1" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">The other cost, and who absorbs it</span><span class="cn-who">Raicovich</span></button><div class="cn-wrap" id="cn-raicovich1"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; book, 2021</div><div class="cn-src"><b>Laura Raicovich</b>, <em>Culture Strike</em></div><div class="cn-body">Laura Raicovich ran the Queens Museum until she resigned in 2018 over a fight of exactly this kind. She names the other cost. When leadership says nothing about a contested subject, the work of answering the public falls to the visitor-facing staff, who at most institutions are the lowest paid and the most diverse people in the building. So the register question is not only a funding question. It also decides who is standing at the front desk on the day somebody objects.</div><div class="cn-cite">Laura Raicovich, <em>Culture Strike: Art and Museums in an Age of Protest</em> (Verso, 2021), ch. 3</div></div></div></div>
 <p>Liz Austerman names the same limit from the staff side, and pairs it with an operator&#x27;s yes. &quot;We&#x27;re absolutely bold in what we do, and tell those stories unapologetically. We stand on our beliefs and our principles.&quot; She keeps the everyday register welcoming to families, because that is who is walking in on a Saturday. And on the constraint: &quot;the subset of funders and people who are able to support the museum, that would be the limiting factor.&quot;</p>
 <p>Karen Holman holds the door open and sets a condition at the same time, from my notes: &quot;We have to deal with difficult history, but not simply judge it. People are shaped by many influences, environments and internal struggles. If we only judge, we lose the opportunity to understand and learn.&quot;</p>
 <p>Gloria Hom sits furthest from Kennedy on this. She acknowledges the anti-Chinese acts without hesitation and then asks what telling them accomplishes. &quot;There are anti-Chinese acts, but what&#x27;s the point?&quot; What she does instead is tell her grandfather&#x27;s story, a seventeen-year-old who arrived with nothing and ended up running the third largest cannery in the state, as evidence that this is the greatest country in the world. Her objection to the alternative is direct: &quot;What&#x27;s the point of making Americans feel bad about their history?&quot; And a moment later: &quot;You&#x27;re not building us up, you&#x27;re tearing us down.&quot;</p>
@@ -507,6 +596,7 @@ p.is-on{}
 <h3 class="sec">5.2 What the technology is for</h3>
 <p data-state="q-tech">Nobody argued against technology, though the room is less settled than that makes it sound. The conversation is about proportion, and underneath proportion it is about angle.</p>
 <p>Sina&#x27;s petri dish supplies the angle. The machines have a museum twelve minutes away and that museum is good at what it does. The ingredients have nobody. The people, the place, the culture, the schools, the money, the weather, the combination that produced the machines.</p>
+<button class="cn-mark" data-cn="conn" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">Why the two museums are not competing for the same visit</span><span class="cn-who">Conn</span></button><div class="cn-wrap" id="cn-conn"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; book, 2010</div><div class="cn-src"><b>Steven Conn</b>, <em>Do Museums Still Need Objects?</em></div><div class="cn-body">Sina&#x27;s distinction has a taxonomy behind it. George Brown Goode sorted museums into six types in 1895, and Steven Conn&#x27;s finding is that the types have drifted apart since rather than converged. A technological museum shows how the machines work. A historical museum asks what a place was like. On that reading the Computer History Museum and this one are not competing for the same visit, because they are not the same kind of institution. That is a more durable thing to say than any number about proportion.</div><div class="cn-cite">Steven Conn, <em>Do Museums Still Need Objects?</em> (University of Pennsylvania Press, 2010), pp. 7&ndash;8 and 21&ndash;22</div></div></div></div>
 <p>Nelson: &quot;Palo Alto is much more than just the technology part. There are the people, the culture, the music, and all that. We want to be able to tell, share those stories.&quot;</p>
 <p>Steve Staiger states the limit case, and he aims it at the board rather than at the town:</p>
 <blockquote class="pull">&quot;You have to try to figure out what a museum is going to appeal to a reasonable number of them. And if it&#x27;s all high tech story, such as some of our board members think it should be, it&#x27;s not going to work.&quot;</blockquote>
@@ -523,6 +613,75 @@ p.is-on{}
 <p>Nobody described those four as a sequence. Four people named four different things and each of them meant it as the answer. The ordering that follows is mine, and it should be read as an argument rather than as a finding.</p>
 <p>Put in order, each one looks like it depends on the one before it. Rooms put people in the building. Programming gives them a reason to come back. A commons is what you have once they come without needing a reason. A forum is what you have when they trust the house enough to bring their hardest arguments into it, and that last one cannot be announced. It can only be earned, which is what Bruce&#x27;s rule about pillars says.</p>
 <p>I think that ordering is right. It is still my ordering, and if it is wrong the museum could reasonably open on any of the four.</p>
+<button class="cn-mark" data-cn="cameron" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">A third option, and a rule for who governs it</span><span class="cn-who">Cameron</span></button><div class="cn-wrap" id="cn-cameron"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; article, 1971</div><div class="cn-src"><b>Duncan Cameron</b>, <em>The Museum, a Temple or the Forum</em></div><div class="cn-body">Cameron called the museum a temple, where expert judgment has already been tested and settled, and said a society also needs a forum, where unproven work gets argued in public. Then he went past the ordering. Do not put the two under one administration. Give the forum its own governing body and its own budget. Where they share a building, separate them visibly, with color, signs and changes to the interior. He gave a reason for each side. Anything let into the museum has been accepted by the establishment, which takes the fight out of it, and untested work sitting in enshrined space weakens the museum&#x27;s other judgments.</div><div class="cn-fig"><svg viewBox="0 0 700 442" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+  <!-- ================= TEMPLE (heartwood side) ================= -->
+  <g id="tf-temple">
+    <text class="tf-title" x="172" y="42" text-anchor="middle" fill="#1A1A1A">TEMPLE</text>
+    <text class="tf-sub" x="172" y="66" text-anchor="middle" fill="#8C8C8C">tested judgment · product</text>
+
+    <rect x="42" y="100" width="260" height="15" fill="#1A1A1A"/>
+    <g fill="#4A4A4A">
+      <rect x="54"  y="115" width="21" height="212"/>
+      <rect x="112" y="115" width="21" height="212"/>
+      <rect x="211" y="115" width="21" height="212"/>
+      <rect x="269" y="115" width="21" height="212"/>
+    </g>
+    <g fill="#1A1A1A">
+      <rect x="50"  y="109" width="29" height="8"/>
+      <rect x="108" y="109" width="29" height="8"/>
+      <rect x="207" y="109" width="29" height="8"/>
+      <rect x="265" y="109" width="29" height="8"/>
+    </g>
+    <rect x="38" y="327" width="268" height="12" fill="#1A1A1A"/>
+
+    <!-- the one enshrined thing, in the open centre aisle -->
+    <rect x="152" y="292" width="40" height="35" fill="#1A1A1A"/>
+    <polygon points="172,258 191,285 153,285" fill="#4A4A4A"/>
+
+    <text class="tf-note" x="172" y="366" text-anchor="middle" fill="#4A4A4A">the experts have already ruled</text>
+  </g>
+
+  <!-- ================= SEAM ================= -->
+  <g id="tf-seam">
+    <line x1="350" y1="88" x2="350" y2="146" stroke="#D8D6D2" stroke-width="2" stroke-dasharray="2 7"/>
+    <line x1="350" y1="288" x2="350" y2="345" stroke="#D8D6D2" stroke-width="2" stroke-dasharray="2 7"/>
+    <text class="tf-seam" x="350" y="216" text-anchor="middle" fill="#8C8C8C"
+          transform="rotate(-90 350 216)">SEPARATE ADMINISTRATION</text>
+  </g>
+
+  <!-- ================= FORUM (cambium side) ================= -->
+  <g id="tf-forum">
+    <text class="tf-title" x="528" y="42" text-anchor="middle" fill="#55BA5A">FORUM</text>
+    <text class="tf-sub" x="528" y="66" text-anchor="middle" fill="#8C8C8C">unproven work · process</text>
+
+    <ellipse cx="528" cy="222" rx="140" ry="108" fill="none" stroke="#D8D6D2" stroke-width="1.5"/>
+
+    <g stroke="#55BA5A" stroke-width="1.6" opacity=".6" fill="none">
+      <line x1="528" y1="126" x2="602" y2="304"/>
+      <line x1="450" y1="152" x2="648" y2="228"/>
+      <line x1="410" y1="222" x2="528" y2="318"/>
+      <line x1="454" y1="298" x2="606" y2="146"/>
+    </g>
+
+    <g fill="#55BA5A">
+      <circle cx="528" cy="126" r="8"/>
+      <circle cx="606" cy="146" r="6"/>
+      <circle cx="648" cy="228" r="9"/>
+      <circle cx="602" cy="304" r="5.5"/>
+      <circle cx="528" cy="318" r="8"/>
+      <circle cx="454" cy="298" r="7"/>
+      <circle cx="410" cy="222" r="6"/>
+      <circle cx="450" cy="152" r="8"/>
+    </g>
+
+    <text class="tf-note" x="528" y="366" text-anchor="middle" fill="#4A4A4A">where the battles are fought</text>
+  </g>
+
+  <!-- ================= CAPTION ================= -->
+  <text class="tf-cap" x="350" y="418" text-anchor="middle" fill="#1A1A1A">His rule is two governing bodies and two budgets.</text>
+</svg>
+</div><div class="cn-body">One reading, and it is mine rather than Cameron&#x27;s. Section 3 has already drawn both of these. The dead core that stopped carrying water and now holds the tree up is doing the temple&#x27;s work. The living layer under the bark, the only place next year gets made, is the forum.</div><div class="cn-cite">Duncan Cameron, &ldquo;The Museum, a Temple or the Forum,&rdquo; <em>Curator</em> XIV/1 (1971), pp. 19&ndash;22. The tree reading is mine; Cameron does not make it.</div></div></div></div>
 <p>Fogarty supplies the destination and its definition, and the definition matters because the word gets used loosely. &quot;I think of it more in the sort of the British interpretation of the commons, that we come together in these common spaces, and what happens in those places drives who we are as a community.&quot; She adds the diagnosis underneath it: people are building theaters inside their houses and buying private lessons for their children, and the shared places need reviving.</p>
 <p>Liz Austerman supplies the professional case for attempting any of it. Museums remain among the most trusted institutions in American life, and trust is the asset a gathering place spends. Karen Holman supplies the standard, from my notes: &quot;Convening and engaging are not the same thing. Convening simply means coming together. Engagement means making a real human connection.&quot; Pat Burt supplies a method out of his own political career, which is to bring people together on values first, before they get anywhere near fighting over outcomes.</p>
 <p>David Kennedy dissents, and I should say how the dissent surfaced. I relayed his position to Fogarty and asked her to answer it. So this is an exchange the interviewer arranged, not two people who found each other.</p>
@@ -545,6 +704,7 @@ p.is-on{}
 <p>And then the line that finishes it: &quot;I think we have to be really welcoming to all parts of the story.&quot;</p>
 <p>Hancock answers as the operator. Nobody arrived on her board pushing an agenda, which left the call to her. She brings a different set of advisors in for each exhibit. On whether the museum should advocate, her answer is not the museum&#x27;s job.</p>
 <p>Call this the institutional-neutrality position, since the museum will need a name for it. It comes from university governance rather than from museum practice, and Fogarty says so. It lets the museum commit loudly to a small number of things, which are telling the history, keeping the record, and holding the room, while declining to adjudicate the disputes inside the history it tells. It answers Kennedy&#x27;s fear of an agenda and honors Nelson&#x27;s appetite for boldness at the same time.</p>
+<button class="cn-mark" data-cn="kalven" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">The document Fogarty is describing, and the objection to it</span><span class="cn-who">Kalven &middot; Raicovich</span></button><div class="cn-wrap" id="cn-kalven"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; report, 1967</div><div class="cn-src"><b>The Kalven Report</b> &middot; and <b>Laura Raicovich</b> against it</div><div class="cn-body">The document is the Kalven Report. A University of Chicago faculty committee chaired by the law professor Harry Kalven Jr. published it on 11 November 1967, under the title <em>Report on the University&#x27;s Role in Political and Social Action</em>. Fogarty&#x27;s date was right. It runs about two pages. It argues for a heavy presumption against the university taking collective positions, on the grounds that a university is not itself a critic but the home and the sponsor of critics.</div><div class="cn-body">Raicovich is the objection it has to survive. She borrows Rebecca Solnit&#x27;s point that we read the center as unmarked and the edges as ideological, so that choosing not to own a car reads as political and choosing to own one does not. She adds Barthes on a paint color named Neutral, which turned out to be a color like the others, and for sale. Neither of them says a museum should advocate. They say that staying out of a fight is one way of settling it, in favor of whoever the current arrangement already suits.</div><div class="cn-cite">Kalven Committee, <em>Report on the University&#x27;s Role in Political and Social Action</em>, University of Chicago Record, 11 November 1967 &middot; Laura Raicovich, <em>Culture Strike</em> (Verso, 2021), ch. 5</div></div></div></div>
 <p>Sorted by part, the spread is wide and the reasons are not interchangeable.</p>
 <p><strong>The record</strong> wants no agenda, because an agenda contaminates the material for whoever reads it in fifty years. <strong>The album</strong> wants the museum to promote what this place did, because that is what an album is for. <strong>The toolbox</strong> wants a thesis, because a platform without one does not produce anything. <strong>The sidewalk</strong> wants a point of view that changes exhibit to exhibit, which is DuBois, and it is the only answer here that treats voice as a variable rather than a setting.</p>
 <p>And <strong>the open door</strong> produces institutional neutrality, which reads as that group&#x27;s answer rather than as neutral arbitration. Her reason is a door reason. A museum that takes a position between groups has just made one of those groups an outsider, and outsiders do not come in. She is not splitting the difference between Kennedy and Nelson. She reasoned from her own group&#x27;s concern and arrived at a rule.</p>
@@ -609,6 +769,7 @@ p.is-on{}
 <p>The museum is allowed to open on one part. It should. Something has to be the headline in September, and a headline is not a verdict. What the museum is not allowed to do is let the other four go unmentioned, or let the copy imply the leading part is the whole answer. Lead with one, exclude none.</p>
 <p data-state="whole-outer">The image the town gave us says the same thing. A cross-section shows every ring at once, and it also has an outermost ring, which is the only one currently growing. The whole cut surface is what the tree is. The outer ring is what it is doing this year. Nobody looking at a stump confuses them.</p>
 <p>Which part leads is the position&#x27;s call and this research does not make it. What the research can say is that the choice is available, that all five have advocates who will accept not being first if they are not erased, and that the failure mode is not choosing wrong. It is not choosing, and letting the emphasis fall wherever the first draft happens to put it.</p>
+<button class="cn-mark" data-cn="meringolo" aria-expanded="false"><span class="cn-caret">&#9656;</span><span class="cn-claim">What a later historian will read this document as</span><span class="cn-who">Meringolo</span></button><div class="cn-wrap" id="cn-meringolo"><div class="cn-inner"><div class="cn-card"><div class="cn-kind">Margin &middot; book, 2012</div><div class="cn-src"><b>Denise D. Meringolo</b>, <em>Museums, Monuments, and National Parks</em></div><div class="cn-body">Denise Meringolo reads institutions by what they were actually built to do, using founding-era paperwork rather than the story an institution tells about itself later. Her finding about the National Park Service is that visitors were handled as a crowd to be managed rather than an audience to engage, and that the handling outlasted the stated mission by decades. A museum with no history yet gets the lens pointed the other way. The founding genealogy is being written now, in the choices this section describes, and this document is part of the record it will be read from.</div><div class="cn-cite">Denise D. Meringolo, <em>Museums, Monuments, and National Parks: Toward a New Genealogy of Public History</em> (University of Massachusetts Press, 2012), pp. 163 and 167&ndash;168</div></div></div></div>
 <p>The next time Pat Burt gives the tour, it will be the same sidewalk, the same garage, the same first offices, the same delegation stopping him on the corner to ask why a town this famous has nothing that tells its own story.</p>
 <p>This time he gets to point at a building.</p>
 <p>That is the whole assignment, and it is both smaller and larger than it sounds. Smaller, because the museum does not have to explain Palo Alto to the world; the world already knows the name and has for decades. Larger, because for the first time in twenty-six years there will be an address to send people to, and what they find when they walk in is the thing sixteen people just spent fourteen hours describing five different ways.</p>
@@ -700,6 +861,30 @@ p.is-on{}
   window.addEventListener('scroll', onScroll, {passive:true});
   window.addEventListener('resize', onScroll, {passive:true});
   resolve();
+})();
+</script>
+
+<script>
+(function(){
+  function resync(){ window.dispatchEvent(new Event('scroll')); }
+  document.querySelectorAll('.cn-mark').forEach(function(btn){
+    var wrap = document.getElementById('cn-' + btn.getAttribute('data-cn'));
+    if(!wrap) return;
+    btn.addEventListener('click', function(){
+      var open = wrap.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if(open){
+        var vis = document.querySelector('.visual');
+        var floor = vis ? vis.getBoundingClientRect().bottom : 0;
+        var top = btn.getBoundingClientRect().top;
+        if(top < floor) window.scrollBy(0, top - floor - 12);
+      }
+      resync();
+    });
+    wrap.addEventListener('transitionend', function(e){
+      if(e.propertyName === 'grid-template-rows') resync();
+    });
+  });
 })();
 </script>
 </body>
