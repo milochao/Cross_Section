@@ -874,10 +874,16 @@ p.is-on{}
       var open = wrap.classList.toggle('is-open');
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       if(open){
+        /* Only correct when the sticky plate actually sits OVER the prose.
+           In the stacked (narrow) layout it does. In the two-column layout it
+           is beside the prose and 100vh tall, so no correction is wanted.
+           Derived from live geometry so it tracks the CSS breakpoint. */
         var vis = document.querySelector('.visual');
-        var floor = vis ? vis.getBoundingClientRect().bottom : 0;
-        var top = btn.getBoundingClientRect().top;
-        if(top < floor) window.scrollBy(0, top - floor - 12);
+        if(vis){
+          var v = vis.getBoundingClientRect(), b = btn.getBoundingClientRect();
+          var overlays = v.right > b.left + 4 && v.left < b.right - 4;
+          if(overlays && b.top < v.bottom) window.scrollBy(0, b.top - v.bottom - 12);
+        }
       }
       resync();
     });
